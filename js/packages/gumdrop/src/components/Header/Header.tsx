@@ -21,27 +21,27 @@ import { Settings } from "../Settings";
 export const Header = ({ narrow } : { narrow : boolean }) => {
   const navs = [
     {
-      href: `/gumdrop/`,
-      innerNarrow: "About",
+      href: `https://nervchain.xyz/`,
+      innerNarrow: "Home",
       inner: <HomeIcon />,
     },
-    {
-      href: `/gumdrop/create`,
-      inner: "Create",
-    },
-    {
-      href: `/gumdrop/claim`,
-      inner: "Claim",
-    },
-    {
-      href: `/gumdrop/close`,
-      inner: "Close",
-    },
+    // {
+    //   href: `/gumdrop/create`,
+    //   inner: "Create",
+    // },
+    // {
+    //   href: `/gumdrop/claim`,
+    //   inner: "Claim",
+    // },
+    // {
+    //   href: `/gumdrop/close`,
+    //   inner: "Close",
+    // },
   ];
 
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
-  const toggleDrawer = (open) => (event) => {
+  const toggleDrawer = (open:any) => (event:any) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
@@ -88,7 +88,7 @@ export const Header = ({ narrow } : { narrow : boolean }) => {
                   <Divider />
                   {navs.map((nav, idx) => {
                     return (
-                      <Link to={nav.href} key={idx} style={{color: "inherit"}}>
+                      <Link to={nav.href} key={idx} style={{color: "#46ffd7 !important"}}>
                         <ListItemButton>
                           {nav.innerNarrow || nav.inner}
                         </ListItemButton>

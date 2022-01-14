@@ -236,14 +236,12 @@ function App() {
                marginRight: "auto",
              }}
           >
-            <Box height="40px" />
             <Switch>
               <Route path="/gumdrop/create" component={Create} />
               <Route path="/gumdrop/claim" component={Claim} />
               <Route path="/gumdrop/close" component={Close} />
               <Route path="/gumdrop/" component={About} />
             </Switch>
-            <Box height="80px" />
           </Box>
         </BrowserRouter>
       </ThemeProvider>
