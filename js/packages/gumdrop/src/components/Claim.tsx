@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RouteComponentProps, } from "react-router-dom";
 import queryString from 'query-string';
 
@@ -43,6 +43,8 @@ import {
 import { sha256 } from "js-sha256";
 import BN from 'bn.js';
 import * as bs58 from "bs58";
+
+import './claim.css';
 
 import {
   useConnection,
@@ -623,6 +625,7 @@ export const Claim = (
 ) => {
   const connection = useConnection();
   const wallet = useWallet();
+  const [hidden] = useState(true);
 
   let query = props.location.search;
   if (query && query.length > 0) {
@@ -911,7 +914,6 @@ export const Claim = (
       signedTransaction: fullySigned,
     });
 
-    console.log(claimResult);
     notify({
       message: "Claim succeeded",
       description: (
@@ -921,6 +923,10 @@ export const Claim = (
       ),
     });
     setTransaction(null);
+    setTimeout(()=> {
+      window.location.href = "https://papers.nervchain.xyz/";
+    },1000)
+    
     try {
       setNeedsTemporalSigner(await fetchNeedsTemporalSigner(
         connection, distributor, indexStr, claimMethod));
@@ -943,7 +949,7 @@ export const Claim = (
     />
   );
 
-  const verifyOTPC = (onClick) => (
+  const verifyOTPC = (onClick:any) => (
     <React.Fragment>
       <TextField
         id="otp-text-field"
@@ -984,7 +990,7 @@ export const Claim = (
     </React.Fragment>
   );
 
-  const claimData = (claimMethod) => {
+  const claimData = (claimMethod:any) => {
     if (claimMethod === "candy") {
       return (
         <React.Fragment>
@@ -1038,7 +1044,7 @@ export const Claim = (
     }
   };
 
-  const populateClaimC = (onClick) => (
+  const populateClaimC = (onClick:any) => (
     <React.Fragment>
       <TextField
         id="distributor-text-field"
@@ -1195,18 +1201,66 @@ export const Claim = (
   );
 
   return (
-    <Stack spacing={2}>
-      {asyncNeedsTemporalSigner && stepper}
-      {steps[stepToUse].inner(handleNext)}
-      {stepToUse > 0 && (
-        <Button
-          color="info"
-          onClick={handleBack}
-        >
-          Back
-        </Button>
-      )}
-    </Stack>
+    <>
+      {!hidden ? (
+        <Stack spacing={2}>
+        {asyncNeedsTemporalSigner && stepper}
+        {steps[stepToUse].inner(handleNext)}
+        {stepToUse > 0 && (
+          <Button
+            color="info"
+            onClick={handleBack}
+          >
+            Back
+          </Button>
+        )}
+      </Stack>
+      ) : (
+      <div className="claim-background">
+        <div className="claim-inner">
+          <div className="claim-content">
+            <img style={{height:"300px"}} src="../Logo-02.png"></img>
+            <div style={{ width: "200px" }}>
+                <Button className={(!wallet.connected || !allFieldsPopulated || asyncNeedsTemporalSigner) ? 'claim-btn-disbled' : 'claim-btn'}
+                  disabled={!wallet.connected || !allFieldsPopulated || asyncNeedsTemporalSigner}
+                  variant="contained"
+                  onClick={(e) => {
+                    setLoading(true);
+                    const wrap = async () => {
+                      try {
+                        const needsTemporalSigner = await fetchNeedsTemporalSigner(
+                            connection, distributor, indexStr, claimMethod);
+                        const transaction = await sendOTP(e);
+                        if (!needsTemporalSigner) {
+                          await verifyOTP(e, transaction);
+                        } else {
+                          setTransaction(transaction);
+                        }
+                        setLoading(false);
+                        // onClick();
+                      } catch (err) {
+                        notify({
+                          message: "Claim failed",
+                          description: `${err}`,
+                        });
+                        setLoading(false);
+                      }
+                    };
+                    wrap();
+                  }}
+                >
+                  Claim Now
+                </Button>
+             
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    )}
+    </>
+    
   );
 };
 

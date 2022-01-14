@@ -1,0 +1,36 @@
+.claim-background {
+    background: url(../images/pngwing.png);
+    background-size: cover;
+    height: calc(100vh - 52px);
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.claim-inner {
+    background: rgba(0,0,0,0.7);
+    height: 100%;
+    width: 100%;
+}
+
+.claim-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+}
+
+.claim-btn, .claim-btn-disbled {
+    width: 100%;
+    background-color: rgb(70, 255, 215) !important;
+    height: 60px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.claim-btn-disbled {
+    border: 1px solid #999999 !important;
+    background-color: #cccccc !important;
+    color: #666666 !important;
+}

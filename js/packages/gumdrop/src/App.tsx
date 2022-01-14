@@ -229,12 +229,12 @@ function App() {
           <CssBaseline />
           <Header narrow={width < 670}/>
           <Box
-            maxWidth="60ch"
-            width="calc(100% - 60px)"
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
+             maxWidth="100%"
+             width="100%"
+             style={{
+               marginLeft: "auto",
+               marginRight: "auto",
+             }}
           >
             <Box height="40px" />
             <Switch>
