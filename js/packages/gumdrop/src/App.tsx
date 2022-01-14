@@ -238,7 +238,7 @@ function App() {
           >
             <Switch>
               <Route path="/gumdrop/create" component={Create} />
-              <Route path="/gumdrop/claim" component={Claim} />
+              <Route path="/claim" component={Claim} />
               <Route path="/gumdrop/close" component={Close} />
               <Route path="/gumdrop/" component={About} />
             </Switch>
