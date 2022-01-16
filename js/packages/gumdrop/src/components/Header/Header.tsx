@@ -21,7 +21,7 @@ import { Settings } from "../Settings";
 export const Header = ({ narrow } : { narrow : boolean }) => {
   const navs = [
     {
-      href: `https://nervchain.xyz/`,
+      href: ``,
       innerNarrow: "Home",
       inner: <HomeIcon />,
     },
