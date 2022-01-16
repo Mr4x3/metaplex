@@ -34,3 +34,10 @@
     background-color: #cccccc !important;
     color: #666666 !important;
 }
+
+@media screen and (max-width: 667px) {
+    .claim-content img {
+        height: 200px !important;
+        
+    }
+}

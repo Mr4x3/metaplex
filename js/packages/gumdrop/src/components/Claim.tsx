@@ -1219,7 +1219,7 @@ export const Claim = (
       <div className="claim-background">
         <div className="claim-inner">
           <div className="claim-content">
-            <img style={{height:"300px"}} src="../Logo-02.png"></img>
+            <img className="logo" style={{height:"300px"}} src="../Logo-02.png"></img>
             <div style={{ width: "200px" }}>
                 <Button className={(!wallet.connected || !allFieldsPopulated || asyncNeedsTemporalSigner) ? 'claim-btn-disbled' : 'claim-btn'}
                   disabled={!wallet.connected || !allFieldsPopulated || asyncNeedsTemporalSigner}

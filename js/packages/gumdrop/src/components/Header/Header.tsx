@@ -77,7 +77,7 @@ export const Header = ({ narrow } : { narrow : boolean }) => {
                 <List>
                   <ListItem>
                     <ListItemText
-                      primary="Gumdrop"
+                      primary="NervChain"
                       primaryTypographyProps={{
                         fontSize: "1.2rem",
                         fontWeight: 'medium',
